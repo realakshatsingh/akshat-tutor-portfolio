@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Akshat S. | Python & Data Science Tutor',
+  title: 'Akshat Singh | Python & Data Science Tutor',
   description: 'Python Tutor from IIT Delhi | For Kids, Job Seekers, Working Professionals | Data Analysis, AI ML, Python',
 };
 
