@@ -1,11 +1,34 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Star, Terminal, Database, Presentation, Briefcase, Award, ArrowRight, MapPin, Globe, DollarSign, Phone, Clock } from 'lucide-react';
+import { Star, Terminal, Database, Presentation, Briefcase, Award, ArrowRight, MapPin, Globe, DollarSign, Phone, Clock, CheckCircle } from 'lucide-react';
 import { timezones, countryCodes } from './data';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+      if (res.ok) {
+        setIsSubmitted(true);
+      }
+    } catch (error) {
+      console.error("Form submission failed:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     const sections = document.querySelectorAll('section[id]');
@@ -341,51 +364,50 @@ export default function Home() {
               </div>
 
               <div className="contact-form">
-                <form action="https://api.web3forms.com/submit" method="POST">
-                  <input type="hidden" name="access_key" value="9a18b350-b656-4350-a78a-f097bdcf8da1" />
-                  <input type="hidden" name="subject" value="New Tutoring Inquiry" />
+                {isSubmitted ? (
+                  <div className="success-message" style={{ textAlign: 'center', padding: '3rem 1rem', background: 'var(--bg)', borderRadius: '12px', border: '1px solid var(--border)' }}>
+                    <CheckCircle size={48} style={{ color: '#4ade80', margin: '0 auto 1rem' }} />
+                    <h3 style={{ marginBottom: '0.5rem', color: 'var(--text)' }}>Thank You!</h3>
+                    <p style={{ color: 'var(--text-muted)' }}>Your query has been submitted. I will get back to you soon.</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit}>
+                    <input type="hidden" name="access_key" value="9a18b350-b656-4350-a78a-f097bdcf8da1" />
+                    <input type="hidden" name="subject" value="New Tutoring Inquiry" />
 
-                  <div className="form-row">
-                    <label>Name</label>
-                    <input type="text" name="name" placeholder="Jane Doe" required />
-                  </div>
-                  <div className="form-row">
-                    <label>Email</label>
-                    <input type="email" name="email" placeholder="jane@example.com" required />
-                  </div>
-                  <div className="form-row" style={{ display: 'flex', gap: '1rem' }}>
-                    <div style={{ flex: '1' }}>
-                      <label>Country Code</label>
-                      <select name="country_code" required style={{ width: '100%', padding: '0.85rem 1rem', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', borderRadius: '8px', fontSize: '0.925rem' }}>
-                        <option value="">Select...</option>
-                        {countryCodes.map((c, i) => (
-                          <option key={i} value={c.code}>{c.name} ({c.code})</option>
-                        ))}
-                      </select>
+                    <div className="form-row">
+                      <label>Name</label>
+                      <input type="text" name="name" placeholder="Jane Doe" required />
                     </div>
-                    <div style={{ flex: '2' }}>
-                      <label>WhatsApp Number</label>
-                      <input type="tel" name="whatsapp" placeholder="e.g. 234 567 8900" required />
+                    <div className="form-row">
+                      <label>Email</label>
+                      <input type="email" name="email" placeholder="jane@example.com" required />
                     </div>
-                  </div>
-                  <div className="form-row">
-                    <label>Time Zone</label>
-                    <select name="timezone" required style={{ width: '100%', padding: '0.85rem 1rem', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', borderRadius: '8px', fontSize: '0.925rem' }}>
-                      <option value="">Select your time zone...</option>
-                      {timezones.map((tz, i) => (
-                        <option key={i} value={tz.value}>{tz.label}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="form-row">
-                    <label>What do you want to learn?</label>
-                    <textarea name="message" placeholder="I want to learn Python for data analysis..." required />
-                  </div>
+                    <div className="form-row" style={{ display: 'flex', gap: '1rem' }}>
+                      <div style={{ flex: '1' }}>
+                        <label>Country Code</label>
+                        <select name="country_code" required style={{ width: '100%', padding: '0.85rem 1rem', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', borderRadius: '8px', fontSize: '0.925rem' }}>
+                          <option value="">Select...</option>
+                          {countryCodes.map((c, i) => (
+                            <option key={i} value={c.code}>{c.name} ({c.code})</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div style={{ flex: '2' }}>
+                        <label>WhatsApp Number</label>
+                        <input type="tel" name="whatsapp" placeholder="e.g. 234 567 8900" required />
+                      </div>
+                    </div>
+                    <div className="form-row">
+                      <label>What do you want to learn?</label>
+                      <textarea name="message" placeholder="I want to learn Python for data analysis..." required />
+                    </div>
 
-                  <button type="submit" className="btn-primary form-btn">
-                    Send Message <ArrowRight size={16} />
-                  </button>
-                </form>
+                    <button type="submit" className="btn-primary form-btn" disabled={isSubmitting}>
+                      {isSubmitting ? 'Sending...' : 'Send Message'} <ArrowRight size={16} />
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
           </div>
