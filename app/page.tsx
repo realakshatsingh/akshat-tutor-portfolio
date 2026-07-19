@@ -200,7 +200,7 @@ export default function Home() {
         <section id="about" className="section">
           <div className="wrap">
             <p className="section-label">About</p>
-            <h2 className="section-heading">Coding since grade 11.</h2>
+            <h2 className="section-heading">Coder from grade 11.</h2>
             <p className="section-desc">
               My programming journey started in school, and my drive for problem-solving led me to IIT Delhi, one of the most competitive institutes in the world. Today, I channel that experience into teaching Python in a way that&apos;s structured, practical, and results-driven.
             </p>
