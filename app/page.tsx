@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Star, Terminal, Database, Presentation, Briefcase, Award, ArrowRight, MapPin, Globe, DollarSign, Phone, Clock, CheckCircle } from 'lucide-react';
 import { timezones, countryCodes } from './data';
+import Logo from '../components/Logo';
 
 const HeroMetrics = ({ className }: { className?: string }) => (
   <div className={className}>
@@ -136,7 +137,9 @@ export default function Home() {
       {/* ─── NAV ─── */}
       <nav className="nav">
         <div className="nav-inner">
-          <span className="nav-brand">Akshat.</span>
+          <a href="#" className="nav-brand" style={{ display: 'flex', alignItems: 'center', height: '36px' }}>
+            <Logo />
+          </a>
           <ul className="nav-links">
             {navItems.map((item) => (
               <li key={item.id}>
@@ -420,7 +423,10 @@ export default function Home() {
 
       <footer>
         <div className="wrap footer">
-          <span>© {new Date().getFullYear()} Akshat Singh</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <div style={{ height: '32px' }}><Logo /></div>
+            <span>© {new Date().getFullYear()} Akshat Singh</span>
+          </div>
           <span>Python & Data Science Tutor</span>
         </div>
       </footer>
