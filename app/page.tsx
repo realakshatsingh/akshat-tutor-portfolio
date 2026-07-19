@@ -148,10 +148,8 @@ export default function Home() {
                 </a>
               </li>
             ))}
-            <li>
-              <a href="#contact" className="nav-cta">Book a Lesson</a>
-            </li>
           </ul>
+          <a href="#contact" className="nav-cta">Book a Lesson</a>
         </div>
       </nav>
 
