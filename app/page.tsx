@@ -4,6 +4,25 @@ import { useEffect, useState } from 'react';
 import { Star, Terminal, Database, Presentation, Briefcase, Award, ArrowRight, MapPin, Globe, DollarSign, Phone, Clock, CheckCircle } from 'lucide-react';
 import { timezones, countryCodes } from './data';
 
+const HeroMetrics = ({ className }: { className?: string }) => (
+  <div className={className}>
+    <div className="metric">
+      <span className="metric-val">
+        <Star size={18} fill="currentColor" /> 5.0
+      </span>
+      <span className="metric-label">Avg. Rating</span>
+    </div>
+    <div className="metric">
+      <span className="metric-val">11+</span>
+      <span className="metric-label">5-Star Reviews</span>
+    </div>
+    <div className="metric">
+      <span className="metric-val">$15</span>
+      <span className="metric-label">per 50 min</span>
+    </div>
+  </div>
+);
+
 export default function Home() {
   const [activeSection, setActiveSection] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -161,22 +180,7 @@ export default function Home() {
                 </a>
               </div>
 
-              <div className="hero-metrics">
-                <div className="metric">
-                  <span className="metric-val">
-                    <Star size={18} fill="currentColor" /> 5.0
-                  </span>
-                  <span className="metric-label">Avg. Rating</span>
-                </div>
-                <div className="metric">
-                  <span className="metric-val">11+</span>
-                  <span className="metric-label">5-Star Reviews</span>
-                </div>
-                <div className="metric">
-                  <span className="metric-val">$15</span>
-                  <span className="metric-label">per 50 min</span>
-                </div>
-              </div>
+              <HeroMetrics className="hero-metrics desktop-metrics" />
             </div>
 
             <div className="hero-visual">
@@ -186,6 +190,8 @@ export default function Home() {
                 alt="Akshat Singh"
               />
             </div>
+
+            <HeroMetrics className="hero-metrics mobile-metrics" />
           </div>
         </section>
 
@@ -383,19 +389,19 @@ export default function Home() {
                       <label>Email</label>
                       <input type="email" name="email" placeholder="jane@example.com" required />
                     </div>
-                    <div className="form-row" style={{ display: 'flex', gap: '1rem' }}>
-                      <div style={{ flex: '1' }}>
+                    <div className="form-row phone-row">
+                      <div className="phone-col-1">
                         <label>Country Code</label>
-                        <select name="country_code" required style={{ width: '100%', padding: '0.85rem 1rem', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--text)', borderRadius: '8px', fontSize: '0.925rem' }}>
+                        <select name="country_code" required className="form-input">
                           <option value="">Select...</option>
                           {countryCodes.map((c, i) => (
                             <option key={i} value={c.code}>{c.name} ({c.code})</option>
                           ))}
                         </select>
                       </div>
-                      <div style={{ flex: '2' }}>
+                      <div className="phone-col-2">
                         <label>WhatsApp Number</label>
-                        <input type="tel" name="whatsapp" placeholder="e.g. 234 567 8900" required />
+                        <input type="tel" name="whatsapp" placeholder="e.g. 234 567 8900" required className="form-input" />
                       </div>
                     </div>
                     <div className="form-row">
