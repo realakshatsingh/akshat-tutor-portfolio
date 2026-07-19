@@ -20,8 +20,8 @@ export default function Image() {
           fontFamily: 'sans-serif',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'flex-end', fontSize: 220, fontWeight: 900, letterSpacing: '-0.05em', color: 'white', marginBottom: '20px' }}>
-          AS<div style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: '#4ade80', margin: '0 0 35px 15px' }}></div>
+        <div style={{ display: 'flex', alignItems: 'center', fontSize: 280, fontWeight: 900, letterSpacing: '-0.05em', color: 'white', marginBottom: '20px' }}>
+          AS
         </div>
         <div style={{ fontSize: 48, color: '#a0a0a0', fontWeight: 500, letterSpacing: '-0.02em' }}>
           Premium Python &amp; Data Science Tutor

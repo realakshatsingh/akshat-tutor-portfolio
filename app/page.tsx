@@ -137,8 +137,9 @@ export default function Home() {
       {/* ─── NAV ─── */}
       <nav className="nav">
         <div className="nav-inner">
-          <a href="#" className="nav-brand" style={{ display: 'flex', alignItems: 'center', height: '36px' }}>
+          <a href="#" className="nav-brand" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', height: '36px', textDecoration: 'none', color: 'inherit' }}>
             <Logo />
+            <span>Akshat Singh</span>
           </a>
           <ul className="nav-links">
             {navItems.map((item) => (
@@ -425,7 +426,8 @@ export default function Home() {
         <div className="wrap footer">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <div style={{ height: '32px' }}><Logo /></div>
-            <span>© {new Date().getFullYear()} Akshat Singh</span>
+            <span style={{ fontWeight: 700, fontSize: '1.1rem', color: '#fff' }}>Akshat Singh</span>
+            <span style={{ marginLeft: '0.25rem' }}>© {new Date().getFullYear()}</span>
           </div>
           <span>Python & Data Science Tutor</span>
         </div>
